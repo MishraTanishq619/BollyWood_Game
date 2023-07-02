@@ -9,7 +9,7 @@ def wait():
 
 
 def preface_statements():
-    print("\t\t\t Welcome to Our Bollywood Film Name Guessing Game!!!")
+    print("\n\n\n\t\t\t Welcome to Our Bollywood Film Name Guessing Game!!!")
     print("\n\n\n")
 
 def exit_line():
@@ -42,7 +42,10 @@ def play():
     life = 3   # life
 
     while True:
-        # os.system("cls")
+        os.system("cls")
+        
+        print("\n\n\n")
+
         op = []
         for i in range(len(word)-1):
             if word[i] in ch:
@@ -51,10 +54,11 @@ def play():
                 op.append("_")
             else:
                 op.append("-")
-        print(*op)
+        
+        print("\t\t\t",*op,"\n\n\n")
         
         if op.count('-') > 0:
-            c = input("Guess a Character: ")
+            c = input("\t\tGuess a Character: ")
             if c.upper() in word:
                 ch.append(c.upper())
                 print("nice Guess ...")
@@ -75,18 +79,38 @@ def play():
             break
     os.system("exit")
     
+
+
+
+def movie_added():
+    print("\n\n\t\tThanks for Contributing this...\n\n")
+    t = input("\n\n\t\t Press Enter to continue...")
+    main()
+
+
+
+
+
 def add_movie():
-    pass
+    fptr = open("data.txt", "a")
+    print("\n\n")
+
+    name = input("\t\tEnter The Name of Film : ")
+    
+    fptr.write(name.upper() + "\n")
+    fptr.close()
+    
+    movie_added()
 
 
-
-if __name__ == '__main__':
+def main():
+    os.system("cls")
     preface_statements()
 
 
     print("\t\t Choose from Following Statements : ")
     print("\n\t\t1. Play the Game.")
-    print("\n\t\t2. Contribute a Movie Name.")
+    print("\n\t\t2. Contribute a Movie Name.\n\n\t\t")
     choice = int(input("Type a Nummber for Your Choice: "))
     if choice==1:
         play()
@@ -94,4 +118,8 @@ if __name__ == '__main__':
         add_movie()
     else:
         print("Wrong Option")
-        # __main__()
+        main()
+
+
+if __name__ == '__main__':
+    main()
