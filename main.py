@@ -32,11 +32,14 @@ def play():
     while(len(l[i]) <=2):
         i = random.randint(0,len(l)-1)
     
-    word = l[i]
+    film = list(map(str,l[i].split(',')))
 
-    j = random.randint(0,len(word)-2)
+    film_name = film[0]
+    actor_name = film[1]
 
-    ch = [word[0],word[j],word[-2],word[(len(word)-1)//2]]
+    j = random.randint(0,len(film_name)-2)
+
+    ch = [film_name[0],film_name[j],film_name[-1],film_name[(len(film_name)-1)//2]]
 
      
     life = 3   # life
@@ -44,24 +47,30 @@ def play():
     while True:
         os.system("cls")
         
-        print("\n\n\n")
+        print("\n\n")
+        print("\t\t\t\t\tActor is ",actor_name,"\n\n")
 
         op = []
-        for i in range(len(word)-1):
-            if word[i] in ch:
-                op.append(word[i])
-            elif word[i]==' ':
+        for i in range(len(film_name)):
+            if film_name[i]==' ':
                 op.append("_")
+            elif film_name[i] in ch:
+                op.append(film_name[i])
             else:
                 op.append("-")
         
-        print("\t\t\t",*op,"\n\n\n")
+        print("\t\t\t\t\t",*op,"\n\n\n")
         
         if op.count('-') > 0:
             c = input("\t\tGuess a Character: ")
-            if c.upper() in word:
-                ch.append(c.upper())
-                print("nice Guess ...")
+            if c.upper() in film_name:
+                if c.upper() in ch:
+                    print("nice Guess ...\n But That character is Already Done....")
+                    life -= 1
+                    print("\nLife is Decreased to ",life," ... \n")
+                else:
+                    ch.append(c.upper())
+                    print("nice Guess ...")
             else:
                 life -= 1
                 print("Wrong guess ... \nLife is Decreased to ",life," ... \n")
@@ -95,9 +104,10 @@ def add_movie():
     fptr = open("data.txt", "a")
     print("\n\n")
 
-    name = input("\t\tEnter The Name of Film : ")
+    film_name = input("\t\tEnter The Name of Film : ")
+    actor_name = input("\t\tEnter The Name of Actor : ")
     
-    fptr.write(name.upper() + "\n")
+    fptr.write((film_name+','+actor_name).upper() + "\n")
     fptr.close()
     
     movie_added()
