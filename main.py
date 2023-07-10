@@ -45,7 +45,7 @@ def play():
     life = 3   # life
 
     while True:
-        os.system("cls")
+        os.system("clear")
         
         print("\n\n")
         print("\t\t\t\t\tActor is ",actor_name,"\n\n")
@@ -77,14 +77,17 @@ def play():
             
             if life > 0:
                 print("Press Enter to continue ...")
+                print("................................................................................................................................")
                 wait()
             else:
                 game_over_line()
                 wait()
+                print("................................................................................................................................")
                 break
         else:
             exit_line()
             wait()
+            print("................................................................................................................................")
             break
     os.system("exit")
     
@@ -114,7 +117,7 @@ def add_movie():
 
 
 def main():
-    os.system("cls")
+    os.system("clear")
     preface_statements()
 
 
