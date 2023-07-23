@@ -12,9 +12,14 @@ def preface_statements():
     print("\n\n\n\t\t\t Welcome to Our Bollywood Film Name Guessing Game!!!")
     print("\n\n\n")
 
-def exit_line():
+def choice_to_play_again():
     print("Wow Youve Done it")
-    print("Press Enter to Exit ...")
+    print("\nTo play again, Type  '1' ...\nTo exit , type anything else...")
+    r = input("Type : ")
+    return 1 if r==str(1) else 0
+
+def exit_line():
+    print("Press Enter to Exit for Sure ...")
 
 
 
@@ -85,6 +90,9 @@ def play():
                 print("................................................................................................................................")
                 break
         else:
+            if choice_to_play_again():
+                os.system('cls')
+                play()
             exit_line()
             wait()
             print("................................................................................................................................")
@@ -99,6 +107,30 @@ def movie_added():
     t = input("\n\n\t\t Press Enter to continue...")
     main()
 
+
+def login():
+    from authentication import Users
+    print("For Logging in ;")
+    
+    uname = input("Type your Username : ")
+    if not uname in Users.keys():
+        i=input("Username error...,Try again...")
+        login()
+    passwd = input("Type your password : ")
+    
+    t=3
+    while(t and passwd!=Users[uname][0]):   # and (uname not in Users.keys())
+        t-=1
+        print("Only {} tries left .".format(t))
+        uname = input("Type correct Username : ")
+        passwd = input("Type Correct password : ")
+    
+    if t:
+        print("Welcome ...")
+        return [uname]+Users[uname]
+    else:
+        print("Come After some time ...")
+        return None
 
 
 
@@ -119,6 +151,11 @@ def add_movie():
 def main():
     os.system("clear")
     preface_statements()
+
+    user = login()
+    if user is None:
+        print("Error login ...")
+        exit()
 
 
     print("\t\t Choose from Following Statements : ")
